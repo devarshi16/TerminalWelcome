@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 'echo "Welcome Devarshi "' >> ~/.bashrc
-echo 'echo "\                     "' >> ~/.bashrc
-echo 'echo " \`_               _/|"' >> ~/.bashrc
+echo 'echo "|\_                  _ "' >> ~/.bashrc
+echo 'echo " \ \               _/_|"' >> ~/.bashrc
 echo 'echo "  \ \_          __/ /"' >> ~/.bashrc
 echo 'echo "   \  \________/   /"' >> ~/.bashrc
 echo 'echo "    |              |"' >> ~/.bashrc
