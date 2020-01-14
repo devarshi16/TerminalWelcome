@@ -1,18 +1,19 @@
 #!/bin/bash
-echo 'echo "Welcome Devarshi "' >> ~/.bashrc
-echo 'echo "|\_                  _ "' >> ~/.bashrc
-echo 'echo " \ \               _/_|"' >> ~/.bashrc
-echo 'echo "  \ \_          __/ /"' >> ~/.bashrc
-echo 'echo "   \  \________/   /"' >> ~/.bashrc
-echo 'echo "    |              |"' >> ~/.bashrc
-echo 'echo "    /              |"' >> ~/.bashrc
-echo 'echo "   |   0       0   |"' >> ~/.bashrc
-echo 'echo "   |       _       |"' >> ~/.bashrc
-echo 'echo "   |()    __    () |"' >> ~/.bashrc
-echo 'echo "    \    (__)      |"' >> ~/.bashrc
-echo 'file="/home/$USER/fortunes.txt"' >> ~/.bashrc
-echo 'if [ -f "$file" ]' >> ~/.bashrc
-echo 'then' >> ~/.bashrc
-echo '    shuf -n 1 $file' >> ~/.bashrc
-echo 'fi' >> ~/.bashrc
-cp ./fortunes.txt /home/$USER/fortunes.txt
+cat <<EOF >> "$HOME/.bashrc"
+echo "Welcome Devarshi "
+echo "|\_                  _ "
+echo " \ \               _/_|"
+echo "  \ \_          __/ /"
+echo "   \  \________/   /"
+echo "    |              |"
+echo "    /              |"
+echo "   |   0       0   |"
+echo "   |       _       |"
+echo "   |()    __    () |"
+echo "    \    (__)      |"
+file="/home/$USER/fortunes.txt"
+if [ -f "$file" ]; then
+    shuf -n 1 $file
+fi
+EOF
+cp ./fortunes.txt $HOME/fortunes.txt
