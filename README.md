@@ -11,8 +11,9 @@ A random one-liner when you switch your terminal on
 ## Installation
 
 ```
-$pip install poketerm
+$ sudo pip install poketerm
 ```
+**NOTE:** You need sudo permission for the package to work
 
 Turn on poketerm
 ```

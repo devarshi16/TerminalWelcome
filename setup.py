@@ -27,13 +27,15 @@ long_description = """
 Put a custom message and/or 
 a pokemon ASCII art and/or 
 a random oneliner when you start your terminal
+NOTE: do $ sudo pip install poketerm
+You need sudo permissions for this to work
 """
 setuptools.setup(
      name='poketerm',  
      version='0.9.2',
      author="devarshi16",
      author_email="devershigpt6@gmail.com",
-     description="Terminal welcome messages!",
+     description="Custom terminal welcome messages, pokemon ASCII art, and random one-liner!($sudo pip install poketerm)",
      long_description=long_description,
      url="https://github.com/devarshi16/TerminalWelcome",
      packages=find_packages(),
