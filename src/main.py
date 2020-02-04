@@ -1,7 +1,7 @@
 from __future__ import print_function
 import argparse
-from pokemons import pokemons
-from one_liners import one_liners
+from .pokemons import pokemons
+from .one_liners import one_liners
 import configparser as cp
 from termcolor import colored
 import random
@@ -45,12 +45,20 @@ def main():
         except:
             with open(local_config_path,'w') as configfile:
                 default_config.write(configfile)
-            change_config(args,local_config_path)
+            try:
+                change_config(args,local_config_path)
+            except:
+                os.system("rm "+os.environ["HOME"]+"/poketermconfig.ini")
+                print("Unable to read local config, maybe try",colored(" $poketerm -t 1","green"), "with sudo?")
             local_config.read(local_config_path)
     else: # If local config file dne
         with open(local_config_path,'w') as configfile:
             default_config.write(configfile)
-        change_config(args,local_config_path)
+        try:
+            change_config(args,local_config_path)
+        except:
+            os.system("rm "+os.path.join(os.environ["HOME"],"poketermconfig.ini"))
+            print("Unable to read local config, maybe try",colored(" $poketerm -t 1","green"), "with sudo?")
         local_config.read(local_config_path)
 
     if args.list:
@@ -106,10 +114,12 @@ def change_config(args,path):
     if args.turn_onf != None:
         if args.turn_onf == 1:
             config["DEFAULTS"]["poketerm"] = 'True'
-            os.system("""echo 'poketerm -s || echo reinstall poketerm and turn it off' >> ~/.bashrc""") 
+            os.system("""echo 'poketerm -s || echo reinstall poketerm and turn it off' >> ~/.bashrc""")
+            os.system("""echo 'poketerm -s || echo reinstall poketerm and turn it off' >> ~/.bash_profile""") 
         else:
             config["DEFAULTS"]["poketerm"] = 'False'
             os.system("""sed -i '/poketerm -s || echo reinstall poketerm and turn it off/d' ~/.bashrc""")
+            os.system("""sed -i '/poketerm -s || echo reinstall poketerm and turn it off/d' ~/.bash_profile""")
 
     with open(path,'w') as configfile:
             config.write(configfile)

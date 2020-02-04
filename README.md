@@ -6,7 +6,7 @@ Pokemon ascii art and/or
 
 A random one-liner when you switch your terminal on
 
-![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/pika.png)
+![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/poke.png)
 
 ## Installation
 
@@ -23,6 +23,8 @@ Turn off poketerm
 ```
 $poketerm -t 0
 ```
+
+**NOTE:** make sure to turn off poketerm before you uninstall it!
 
 ## Poketerm help
 ```
@@ -49,6 +51,88 @@ optional arguments:
   -s, --show            run poketerm with the active configuration
 ```
 
+## List of available pokemons
+```
+$ poketerm -l
+Available Pokemons are
+pikachu
+
+|\_                  _ 
+ \ \               _/_|
+  \ \_          __/ /
+   \  \________/   /
+    |              |
+    /              |
+   |   0       0   |
+   |       _       |
+   |()    __    () |
+    \    (__)      |
+bulbasaur
+ 
+            ____M___
+           (  /   \ \
+     \ ----/\ (    ) )
+     / O  O  |---- _/
+    |   _         \
+     \__U____/ _(  |
+      |_/   |_/  |_/
+dugtrio
+
+              _______
+             /       \
+            |  0   0  |
+          __|__  <>   | 
+         /     \    __|__
+        |       |  /     \
+        | 0  0  | / 0  0  |
+        |  <>   |/   <>   /
+        |       |        /
+       0oOwwwWwwOOoowwwwww
+meowth
+
+                ___                       ___ 
+               |   \_    ^        ^     _/   |
+               |     \_ | |      | |  _/ __  |
+               |       \| | /""\ | | / _/  | |
+               |    __..|"||____||"|../.  /  |
+         __     \_ /    | ||____|| |    \/ _/    __ 
+         \ """--__:      v  \../  v      :__--""" / 
+          ""--___/     ____       ____    \___--""
+                .     (_||_)     (_||_)    .
+        ________|_                        __|_______
+        \__________                       _________/
+                .        __________        .
+                  .      \   __   /      .
+                    .     \_/__\_/     .
+                      .              .
+                        "..........."
+noascii
+```
+
+## Change Pokemon ASCII art
+```
+$ poketerm -p meowth
+```
+
+## Change Custom Message
+```
+$ poketerm -m "Your Message Here"
+```
+
+## Turn off Random One-Liner
+```
+$ poketerm -o 0
+```
+
+## Turn off pokemon ascii art
+```
+$ poketerm -p noascii
+```
+
+## Turn off Custom Message
+```
+$ poketerm -m nomessage
+```
 
 ## Acknowledgments
 

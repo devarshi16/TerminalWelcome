@@ -30,7 +30,7 @@ a random oneliner when you start your terminal
 """
 setuptools.setup(
      name='poketerm',  
-     version='0.9.0',
+     version='0.9.2',
      author="devarshi16",
      author_email="devershigpt6@gmail.com",
      description="Terminal welcome messages!",
@@ -39,20 +39,19 @@ setuptools.setup(
      packages=find_packages(),
      keywords="terminal ascii-art shell-script welcomemessage bash pikachu bulbasaur pokemon-terminal pokemon linux linux-shell meowth",
      package_data={
-         "src":["*.ini","*.default"]
+         "src":["*.ini","*.default","*.py"]
      },
      include_package_data=True,
-     #include_package_data=True,
      classifiers=[
          "Development Status :: 4 - Beta",
-         "Programming Language :: Python :: 3.7",
+         "Programming Language :: Python",
          "License :: OSI Approved :: MIT License",
-         "Operating System :: Unix",
+         "Operating System :: POSIX :: Linux",
      ],
      entry_points = {
          "console_scripts": ['poketerm = src.main:main']
      },
-     python_requires=">=3.5",
+     python_requires=">=2.7",
      install_requires=[
         'readchar>=2.0.1',
         'termcolor>=1.1.0'
