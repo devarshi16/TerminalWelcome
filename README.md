@@ -1,4 +1,7 @@
 # TerminalWelcome
+[![Downloads](https://pepy.tech/badge/poketerm)](https://pepy.tech/project/poketerm)
+[![Downloads](https://pepy.tech/badge/poketerm/month)](https://pepy.tech/project/poketerm/month)
+[![Downloads](https://pepy.tech/badge/poketerm/week)](https://pepy.tech/project/poketerm/week)
 
 Get greeted by custom message and/or
 
