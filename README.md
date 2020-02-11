@@ -1,4 +1,5 @@
-# TerminalWelcome
+# poketerm
+[![PyPI version](https://badge.fury.io/py/poketerm.svg)](https://badge.fury.io/py/poketerm)
 [![Downloads](https://pepy.tech/badge/poketerm)](https://pepy.tech/project/poketerm)
 [![Downloads](https://pepy.tech/badge/poketerm/month)](https://pepy.tech/project/poketerm/month)
 [![Downloads](https://pepy.tech/badge/poketerm/week)](https://pepy.tech/project/poketerm/week)
