@@ -13,7 +13,7 @@ A random one-liner when you switch your terminal on
 ![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/poke.png)
 
 ## Installation
-
+Alternate installation instructions -> https://youtu.be/JBUYfeah5c8
 ```
 $ sudo pip install poketerm
 ```
