@@ -1,5 +1,10 @@
 #!/bin/bash
-cat <<EOF >> "$HOME/.bashrc"
+file="$HOME/fortunes.txt"
+if [ ! -f "$file" ]; then
+    cp "$(dirname "$0")/fortunes.txt" "$file"
+fi
+
+cat <<'EOF' >> "$HOME/.bashrc"
 echo "Welcome Devarshi "
 echo "|\_                  _ "
 echo " \ \               _/_|"
@@ -11,9 +16,9 @@ echo "   |   0       0   |"
 echo "   |       _       |"
 echo "   |()    __    () |"
 echo "    \    (__)      |"
-file="/home/$USER/fortunes.txt"
+file="$HOME/fortunes.txt"
 if [ -f "$file" ]; then
-    shuf -n 1 $file
+    shuf -n 1 "$file"
 fi
 EOF
-cp ./fortunes.txt $HOME/fortunes.txt
+

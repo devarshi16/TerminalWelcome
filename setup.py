@@ -32,7 +32,7 @@ You need sudo permissions for this to work
 """
 setuptools.setup(
      name='poketerm',  
-     version='0.9.2',
+     version='0.10.0',
      author="devarshi16",
      author_email="devershigpt6@gmail.com",
      description="Custom terminal welcome messages, pokemon ASCII art, and random one-liner!($sudo pip install poketerm)",
@@ -46,14 +46,14 @@ setuptools.setup(
      include_package_data=True,
      classifiers=[
          "Development Status :: 4 - Beta",
-         "Programming Language :: Python",
+         "Programming Language :: Python :: 3",
          "License :: OSI Approved :: MIT License",
          "Operating System :: POSIX :: Linux",
      ],
      entry_points = {
          "console_scripts": ['poketerm = src.main:main']
      },
-     python_requires=">=2.7",
+     python_requires=">=3.7",
      install_requires=[
         'readchar>=2.0.1',
         'termcolor>=1.1.0'

@@ -51,8 +51,8 @@ optional arguments:
   -m MESSAGE, --message MESSAGE
                         custom message to be displayed in the start. [nomessage] for
                         no message
-  -t {0,1}, --turn-onf {0,1}
-                        turn on poke term [1], turn off [0]
+  -t {0,1}, --turn-on {0,1}
+                        turn on poketerm [1], turn off [0]
   -s, --show            run poketerm with the active configuration
 ```
 

@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poketerm"
+version = "0.10.0"
+description = "Custom terminal welcome messages, pokemon ASCII art, and random one-liner!"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [{name = "devarshi16", email = "devershigpt6@gmail.com"}]
+dependencies = [
+    "readchar>=2.0.1",
+    "termcolor>=1.1.0",
+]
+
+[project.scripts]
+poketerm = "src.main:main"
+
