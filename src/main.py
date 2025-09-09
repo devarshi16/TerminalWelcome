@@ -124,13 +124,11 @@ def change_config(args,path):
             config["DEFAULTS"]["ascii"] = 'False'
             '''
     def ensure_line(file_path: Path, line: str) -> None:
-        if file_path.exists():
-            with file_path.open('r+') as f:
-                lines = [l.rstrip('\n') for l in f.readlines()]
-                if line not in lines:
-                    f.write(line + '\n')
-        else:
-            with file_path.open('w') as f:
+        if not file_path.exists():
+            return
+        with file_path.open('r+') as f:
+            lines = [l.rstrip('\n') for l in f.readlines()]
+            if line not in lines:
                 f.write(line + '\n')
 
     def remove_line(file_path: Path, line: str) -> None:

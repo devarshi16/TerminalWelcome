@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [0.10.1] - 2025-09-09
 ### Added
 - Install poketerm into zsh startup files alongside bash equivalents.
+### Fixed
+- Avoid creating shell startup files for shells that are not present.
 
 ## [0.10.0] - 2025-09-08
 ### Changed
