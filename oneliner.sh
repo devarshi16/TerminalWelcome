@@ -1,6 +1,7 @@
 #!/bin/bash
-file="/home/$USER/fortunes.txt"
-if [ -f "$file" ]; then
-    shuf -n 1 $file
+file="$HOME/fortunes.txt"
+if [ ! -f "$file" ]; then
+    cp "$(dirname "$0")/fortunes.txt" "$file"
 fi
-cp ./fortunes.txt $HOME/fortunes.txt
+shuf -n 1 "$file"
+

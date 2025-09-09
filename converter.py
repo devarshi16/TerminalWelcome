@@ -1,12 +1,15 @@
-import os
+from pathlib import Path
 
-lines = []
-with open('fortunes.txt','r') as f:
-    for l in f.readlines():
-        lines.append(l)
 
-with open('one_liners.py','w') as o:
-    o.write('one_liners = [\n')
-    for l in lines:
-        o.write("r'''"+l.strip()+"''',\n")
-    o.write(']')
+def main() -> None:
+    fortunes_path = Path('fortunes.txt')
+    with fortunes_path.open('r') as src, Path('one_liners.py').open('w') as dst:
+        dst.write('one_liners = [\n')
+        for line in src:
+            dst.write(f"r'''{line.strip()}''',\n")
+        dst.write(']\n')
+
+
+if __name__ == '__main__':
+    main()
+
