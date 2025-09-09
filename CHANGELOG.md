@@ -8,7 +8,9 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Avoid creating shell startup files for shells that are not present.
 - Silence Powerlevel10k instant prompt warning by setting
-  `POWERLEVEL9K_INSTANT_PROMPT=quiet` when adding to zsh configs.
+  `POWERLEVEL9K_INSTANT_PROMPT=quiet` when adding to zsh configs and
+  placing the variable at the top of zsh startup files to prevent
+  warnings.
 - Skip adding a second `POWERLEVEL9K_INSTANT_PROMPT` line if one already
   exists in zsh startup files.
 

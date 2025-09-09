@@ -55,26 +55,34 @@ def test_turn_on_updates_zshrc() -> None:
     with tempfile.TemporaryDirectory() as tmp_home:
         env = {**os.environ, "HOME": tmp_home}
         zshrc = Path(tmp_home) / ".zshrc"
-        zshrc.touch()
+        zshrc.write_text("export PATH=/usr/bin\n")
         assert run_cli(["-t", "1"], env=env).returncode == 0
         expected = (
             "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+            "export PATH=/usr/bin\n"
             "poketerm -s || echo reinstall poketerm and turn it off\n"
         )
         assert zshrc.read_text() == expected
         assert run_cli(["-t", "0"], env=env).returncode == 0
-        # The Powerlevel10k line remains
-        assert zshrc.read_text() == "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+        # The Powerlevel10k line remains at the top
+        assert zshrc.read_text() == (
+            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+            "export PATH=/usr/bin\n"
+        )
 
 
 def test_turn_on_does_not_duplicate_existing_p10k_line() -> None:
     with tempfile.TemporaryDirectory() as tmp_home:
         env = {**os.environ, "HOME": tmp_home}
         zshrc = Path(tmp_home) / ".zshrc"
-        zshrc.write_text("typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n")
+        zshrc.write_text(
+            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+            "alias ll='ls -al'\n"
+        )
         assert run_cli(["-t", "1"], env=env).returncode == 0
         expected = (
             "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+            "alias ll='ls -al'\n"
             "poketerm -s || echo reinstall poketerm and turn it off\n"
         )
         assert zshrc.read_text() == expected

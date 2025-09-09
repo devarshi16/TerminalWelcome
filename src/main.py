@@ -131,6 +131,18 @@ def change_config(args,path):
             if line not in lines:
                 f.write(line + '\n')
 
+    def ensure_line_prepend(file_path: Path, line: str) -> None:
+        """Ensure a line exists at the top of a file without duplicating it."""
+        if not file_path.exists():
+            return
+        with file_path.open('r+') as f:
+            lines = f.readlines()
+            if any(l.rstrip('\n') == line for l in lines):
+                return
+            f.seek(0)
+            f.write(line + '\n')
+            f.writelines(lines)
+
     def remove_line(file_path: Path, line: str) -> None:
         if not file_path.exists():
             return
@@ -151,7 +163,7 @@ def change_config(args,path):
             for fname in bash_files:
                 ensure_line(Path.home() / fname, bash_startup)
             for fname in zsh_files:
-                ensure_line(Path.home() / fname, p10k_quiet)
+                ensure_line_prepend(Path.home() / fname, p10k_quiet)
                 ensure_line(Path.home() / fname, bash_startup)
         else:
             config["DEFAULTS"]["poketerm"] = 'False'
