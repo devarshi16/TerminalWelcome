@@ -32,7 +32,7 @@ You need sudo permissions for this to work
 """
 setuptools.setup(
      name='poketerm',  
-     version='0.10.0',
+     version='0.10.1',
      author="devarshi16",
      author_email="devershigpt6@gmail.com",
      description="Custom terminal welcome messages, pokemon ASCII art, and random one-liner!($sudo pip install poketerm)",

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.1] - 2025-09-09
+### Added
+- Install poketerm into zsh startup files alongside bash equivalents.
+
 ## [0.10.0] - 2025-09-08
 ### Changed
 - Fix CLI flag typo and streamline message handling.

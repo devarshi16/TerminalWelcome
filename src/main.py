@@ -145,13 +145,14 @@ def change_config(args,path):
 
     if args.turn_on is not None:
         startup = "poketerm -s || echo reinstall poketerm and turn it off"
+        shell_files = ('.bashrc', '.bash_profile', '.zshrc', '.zprofile')
         if args.turn_on == 1:
             config["DEFAULTS"]["poketerm"] = 'True'
-            for fname in ('.bashrc', '.bash_profile'):
+            for fname in shell_files:
                 ensure_line(Path.home() / fname, startup)
         else:
             config["DEFAULTS"]["poketerm"] = 'False'
-            for fname in ('.bashrc', '.bash_profile'):
+            for fname in shell_files:
                 remove_line(Path.home() / fname, startup)
 
     with open(path,'w') as configfile:

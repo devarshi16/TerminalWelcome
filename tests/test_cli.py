@@ -50,3 +50,13 @@ def test_change_default_pokemon() -> None:
         result = run_cli(["-o", "0", "-s"], env=env)
         assert pokemons["meowth"] in result.stdout
 
+
+def test_turn_on_updates_zshrc() -> None:
+    with tempfile.TemporaryDirectory() as tmp_home:
+        env = {**os.environ, "HOME": tmp_home}
+        zshrc = Path(tmp_home) / ".zshrc"
+        assert run_cli(["-t", "1"], env=env).returncode == 0
+        assert zshrc.read_text() == "poketerm -s || echo reinstall poketerm and turn it off\n"
+        assert run_cli(["-t", "0"], env=env).returncode == 0
+        assert zshrc.read_text() == ""
+
