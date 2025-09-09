@@ -23,6 +23,8 @@ Turn on poketerm
 ```
 $poketerm -t 1
 ```
+Poketerm sets `POWERLEVEL9K_INSTANT_PROMPT=quiet` when updating zsh
+configs to avoid Powerlevel10k instant prompt warnings.
 
 Turn off poketerm
 ```

@@ -57,7 +57,11 @@ def test_turn_on_updates_zshrc() -> None:
         zshrc = Path(tmp_home) / ".zshrc"
         zshrc.touch()
         assert run_cli(["-t", "1"], env=env).returncode == 0
-        assert zshrc.read_text() == "poketerm -s || echo reinstall poketerm and turn it off\n"
+        expected = (
+            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet; "
+            "poketerm -s || echo reinstall poketerm and turn it off\n"
+        )
+        assert zshrc.read_text() == expected
         assert run_cli(["-t", "0"], env=env).returncode == 0
         assert zshrc.read_text() == ""
 
