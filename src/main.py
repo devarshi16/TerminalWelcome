@@ -143,10 +143,7 @@ def change_config(args,path):
 
     if args.turn_on is not None:
         bash_startup = "poketerm -s || echo reinstall poketerm and turn it off"
-        zsh_startup = (
-            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet; "
-            + bash_startup
-        )
+        p10k_quiet = "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet"
         bash_files = ('.bashrc', '.bash_profile')
         zsh_files = ('.zshrc', '.zprofile')
         if args.turn_on == 1:
@@ -154,13 +151,14 @@ def change_config(args,path):
             for fname in bash_files:
                 ensure_line(Path.home() / fname, bash_startup)
             for fname in zsh_files:
-                ensure_line(Path.home() / fname, zsh_startup)
+                ensure_line(Path.home() / fname, p10k_quiet)
+                ensure_line(Path.home() / fname, bash_startup)
         else:
             config["DEFAULTS"]["poketerm"] = 'False'
             for fname in bash_files:
                 remove_line(Path.home() / fname, bash_startup)
             for fname in zsh_files:
-                remove_line(Path.home() / fname, zsh_startup)
+                remove_line(Path.home() / fname, bash_startup)
 
     with open(path,'w') as configfile:
         config.write(configfile)

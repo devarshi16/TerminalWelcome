@@ -58,10 +58,24 @@ def test_turn_on_updates_zshrc() -> None:
         zshrc.touch()
         assert run_cli(["-t", "1"], env=env).returncode == 0
         expected = (
-            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet; "
+            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
             "poketerm -s || echo reinstall poketerm and turn it off\n"
         )
         assert zshrc.read_text() == expected
         assert run_cli(["-t", "0"], env=env).returncode == 0
-        assert zshrc.read_text() == ""
+        # The Powerlevel10k line remains
+        assert zshrc.read_text() == "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+
+
+def test_turn_on_does_not_duplicate_existing_p10k_line() -> None:
+    with tempfile.TemporaryDirectory() as tmp_home:
+        env = {**os.environ, "HOME": tmp_home}
+        zshrc = Path(tmp_home) / ".zshrc"
+        zshrc.write_text("typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n")
+        assert run_cli(["-t", "1"], env=env).returncode == 0
+        expected = (
+            "typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet\n"
+            "poketerm -s || echo reinstall poketerm and turn it off\n"
+        )
+        assert zshrc.read_text() == expected
 
