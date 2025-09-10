@@ -12,6 +12,32 @@ A random one-liner when you switch your terminal on inside a dialog cloud
 
 ![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/poke.png)
 
+### Example output
+
+```
+$ poketerm -s
+ _________________________________________
+/ Every moment is precious.  And precarious.  -- Edward Abbey \
+\_________________________________________/
+  \
+   \
+
+|\_                  _
+ \ \               _/_|
+  \ \_          __/ /
+   \  \________/   /
+    |              |
+    /              |
+   |   0       0   |
+   |       _       |
+   |()    __    () |
+    \    (__)      |
+```
+
+Record several invocations with different Pokémon and one-liners and combine them
+into a GIF using a terminal recorder such as [asciinema](https://asciinema.org/)
+to showcase rotating examples.
+
 ## Installation
 Alternate installation instructions -> https://youtu.be/JBUYfeah5c8
 ```
