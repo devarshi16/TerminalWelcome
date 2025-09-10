@@ -51,6 +51,18 @@ def test_change_default_pokemon() -> None:
         assert pokemons["meowth"] in result.stdout
 
 
+def test_dialog_cloud() -> None:
+    with tempfile.TemporaryDirectory() as tmp_home:
+        env = {**os.environ, "HOME": tmp_home}
+        result = run_cli(["-p", "noascii", "-d", "1", "-s"], env=env)
+        assert result.returncode == 0
+        lines = result.stdout.splitlines()
+        # bubble has 5 lines; second line contains the text
+        assert len(lines) == 5
+        inner = lines[1][2:-2]
+        assert inner in one_liners
+
+
 def test_turn_on_updates_zshrc() -> None:
     with tempfile.TemporaryDirectory() as tmp_home:
         env = {**os.environ, "HOME": tmp_home}

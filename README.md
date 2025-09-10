@@ -37,7 +37,7 @@ $poketerm -t 0
 ## Poketerm help
 ```
 usage: main.py [-h] [-p {bulbasaur,dugtrio,meowth,pikachu,noascii}] [-l]
-               [-o {0,1}] [-m MESSAGE] [-t {0,1}] [-s]
+               [-o {0,1}] [-m MESSAGE] [-t {0,1}] [-d {0,1}] [-s]
 
 Display a Custom Message, a Pokemon ASCII Art and a Random Oneliner.
 NOTE: Remember to turn off poketerm using -t 0 tag before you uninstall
@@ -54,6 +54,8 @@ optional arguments:
   -m MESSAGE, --message MESSAGE
                         custom message to be displayed in the start. [nomessage] for
                         no message
+  -d {0,1}, --dialog {0,1}
+                        turn dialog cloud on [1] or off [0]
   -t {0,1}, --turn-on {0,1}
                         turn on poketerm [1], turn off [0]
   -s, --show            run poketerm with the active configuration
@@ -130,6 +132,16 @@ $ poketerm -m "Your Message Here"
 ## Turn off Random One-Liner
 ```
 $ poketerm -o 0
+```
+
+## Turn on dialog cloud
+```
+$ poketerm -d 1
+```
+
+## Turn off dialog cloud
+```
+$ poketerm -d 0
 ```
 
 ## Turn off pokemon ascii art
