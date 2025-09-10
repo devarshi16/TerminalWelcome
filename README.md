@@ -8,9 +8,35 @@ Get greeted by custom message and/or
 
 Pokemon ascii art and/or
 
-A random one-liner when you switch your terminal on
+A random one-liner when you switch your terminal on inside a dialog cloud
 
 ![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/poke.png)
+
+### Example output
+
+```
+$ poketerm -s
+ _________________________________________
+/ Every moment is precious.  And precarious.  -- Edward Abbey \
+\_________________________________________/
+  \
+   \
+
+|\_                  _
+ \ \               _/_|
+  \ \_          __/ /
+   \  \________/   /
+    |              |
+    /              |
+   |   0       0   |
+   |       _       |
+   |()    __    () |
+    \    (__)      |
+```
+
+Record several invocations with different Pokémon and one-liners and combine them
+into a GIF using a terminal recorder such as [asciinema](https://asciinema.org/)
+to showcase rotating examples.
 
 ## Installation
 Alternate installation instructions -> https://youtu.be/JBUYfeah5c8
@@ -37,7 +63,7 @@ $poketerm -t 0
 ## Poketerm help
 ```
 usage: main.py [-h] [-p {bulbasaur,dugtrio,meowth,pikachu,noascii}] [-l]
-               [-o {0,1}] [-m MESSAGE] [-t {0,1}] [-s]
+               [-o {0,1}] [-m MESSAGE] [-t {0,1}] [-d {0,1}] [-s]
 
 Display a Custom Message, a Pokemon ASCII Art and a Random Oneliner.
 NOTE: Remember to turn off poketerm using -t 0 tag before you uninstall
@@ -54,6 +80,8 @@ optional arguments:
   -m MESSAGE, --message MESSAGE
                         custom message to be displayed in the start. [nomessage] for
                         no message
+  -d {0,1}, --dialog {0,1}
+                        turn dialog cloud on [1] or off [0]
   -t {0,1}, --turn-on {0,1}
                         turn on poketerm [1], turn off [0]
   -s, --show            run poketerm with the active configuration
@@ -127,9 +155,22 @@ $ poketerm -p meowth
 $ poketerm -m "Your Message Here"
 ```
 
+Random one-liners and the dialog cloud are enabled by default. Disable them with the following commands or re-enable them as needed.
+
 ## Turn off Random One-Liner
 ```
 $ poketerm -o 0
+```
+
+## Re-enable dialog cloud
+Enabled by default; use this if you've disabled it.
+```
+$ poketerm -d 1
+```
+
+## Turn off dialog cloud
+```
+$ poketerm -d 0
 ```
 
 ## Turn off pokemon ascii art

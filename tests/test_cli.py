@@ -9,6 +9,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.one_liners import one_liners
 from src.pokemons import pokemons
+from src.main import _dialog_cloud
 
 
 def run_cli(args: list[str], env: dict[str, str] | None = None) -> subprocess.CompletedProcess:
@@ -39,8 +40,10 @@ def test_show_one_liner() -> None:
         env = {**os.environ, "HOME": tmp_home}
         result = run_cli(["-p", "noascii", "-s"], env=env)
         assert result.returncode == 0
-        line = result.stdout.strip()
-        assert line in one_liners
+        lines = result.stdout.splitlines()
+        assert lines[-1] == "   \\"
+        inner = " ".join(l[2:-2].strip() for l in lines[1:-3])
+        assert inner in one_liners
 
 
 def test_change_default_pokemon() -> None:
@@ -49,6 +52,26 @@ def test_change_default_pokemon() -> None:
         assert run_cli(["-p", "meowth"], env=env).returncode == 0
         result = run_cli(["-o", "0", "-s"], env=env)
         assert pokemons["meowth"] in result.stdout
+
+
+def test_dialog_cloud_disabled() -> None:
+    with tempfile.TemporaryDirectory() as tmp_home:
+        env = {**os.environ, "HOME": tmp_home}
+        result = run_cli(["-p", "noascii", "-d", "0", "-s"], env=env)
+        assert result.returncode == 0
+        line = result.stdout.strip()
+        assert line in one_liners
+
+
+def test_dialog_cloud_wraps_long_line() -> None:
+    long_text = "x" * 200
+    cloud = _dialog_cloud(long_text)
+    lines = cloud.splitlines()
+    assert len(lines) > 5
+    assert lines[0].startswith(" ")
+    assert lines[-2] == "  \\"
+    assert lines[-1] == "   \\"
+    assert len(lines[0]) < len(long_text) + 4
 
 
 def test_turn_on_updates_zshrc() -> None:

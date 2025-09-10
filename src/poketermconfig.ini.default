@@ -4,3 +4,4 @@ one-liner = True
 message = None
 poketerm = True
 ascii = True
+dialog = True

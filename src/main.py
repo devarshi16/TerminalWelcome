@@ -3,6 +3,8 @@ import configparser as cp
 import os
 import random
 from pathlib import Path
+import shutil
+import textwrap
 
 try:
     from termcolor import colored
@@ -12,6 +14,32 @@ except ImportError:  # pragma: no cover - fallback when termcolor isn't installe
 from .pokemons import pokemons
 from .one_liners import one_liners
 
+
+def _dialog_cloud(text: str) -> str:
+    """Return a speech bubble around *text* with basic wrapping.
+
+    The bubble expands to match the longest wrapped line so longer
+    one-liners stay inside the cloud instead of spilling past the
+    terminal width.
+    """
+
+    columns = shutil.get_terminal_size(fallback=(80, 24)).columns - 4
+    lines = textwrap.wrap(text, width=max(1, columns)) or [""]
+    inner_width = max(len(line) for line in lines)
+    top = " " + "_" * (inner_width + 2)
+    bottom = "\\" + "_" * (inner_width + 2) + "/"
+
+    bubble = [top]
+    if len(lines) == 1:
+        bubble.append(f"/ {lines[0].ljust(inner_width)} \\")
+    else:
+        bubble.append(f"/ {lines[0].ljust(inner_width)} \\")
+        for line in lines[1:-1]:
+            bubble.append(f"| {line.ljust(inner_width)} |")
+        bubble.append(f"\\ {lines[-1].ljust(inner_width)} /")
+    bubble.extend([bottom, "  \\", "   \\"])
+    return "\n".join(bubble)
+
 def main():
     parser = argparse.ArgumentParser(description = 'Display a Custom Message, a Pokemon ASCII Art and a Random Oneliner.\n'+colored('NOTE: Remember to turn off poketerm using -t 0 tag before you uninstall it','red'))
     parser.add_argument('-p','--pokemon',help='pokemon name for ASCII art. [noascii] for disabling ASCII art',choices=pokemons.keys())
@@ -20,6 +48,7 @@ def main():
     parser.add_argument('-m','--message',help='custom message to be displayed in the start. [nomessage] for no message')
     #parser.add_argument('-a','--ascii', help='turn ASCII art on [1] or off [0]',type=int, choices = [0,1])
     parser.add_argument('-t','--turn-on',help='turn on poketerm [1], turn off [0]',type=int,choices=[0,1])
+    parser.add_argument('-d','--dialog',help='turn dialog cloud on [1] or off [0]',type=int,choices=[0,1])
     parser.add_argument('-s','--show',help='run poketerm with the active configuration',action='store_true')
 
     args = parser.parse_args()
@@ -86,15 +115,18 @@ def main():
         if msg and msg.lower() != "none":
             print(msg)
 
-        # show ascii art        
-        if local_config["DEFAULTS"]["pokemon"] == "noascii":
-            pass
-        else:
+        line = None
+        show_dialog = local_config["DEFAULTS"].get("dialog", "False") == "True"
+        if local_config["DEFAULTS"].get("one-liner") == "True":
+            line = random.choice(one_liners)
+            if show_dialog:
+                print(_dialog_cloud(line))
+
+        if local_config["DEFAULTS"]["pokemon"] != "noascii":
             print(pokemons[local_config["DEFAULTS"]["pokemon"]])
 
-        # show random one liner
-        if local_config["DEFAULTS"]["one-liner"] == 'True':
-            print(random.choice(one_liners))
+        if line and not show_dialog:
+            print(line)
 
 def change_config(args,path):
     config = cp.ConfigParser()
@@ -111,11 +143,17 @@ def change_config(args,path):
             config["DEFAULTS"]["message"] = 'None'
         else:
             config["DEFAULTS"]["message"] = args.message
-    if args.one_liner != None:
+    if args.dialog is not None:
+        if args.dialog == 1:
+            config["DEFAULTS"]["dialog"] = 'True'
+        else:
+            config["DEFAULTS"]["dialog"] = 'False'
+    if args.one_liner is not None:
         if args.one_liner == 1:
             config["DEFAULTS"]["one-liner"] = 'True'
         else:
             config["DEFAULTS"]["one-liner"] = 'False'
+            config["DEFAULTS"]["dialog"] = 'False'
     '''
     if args.ascii != None:
         if args.ascii == 1:
