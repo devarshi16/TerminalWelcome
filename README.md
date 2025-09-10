@@ -8,7 +8,7 @@ Get greeted by custom message and/or
 
 Pokemon ascii art and/or
 
-A random one-liner when you switch your terminal on
+A random one-liner when you switch your terminal on inside a dialog cloud
 
 ![alt text](https://github.com/devarshi16/TerminalWelcome/blob/master/poke.png)
 
@@ -129,12 +129,15 @@ $ poketerm -p meowth
 $ poketerm -m "Your Message Here"
 ```
 
+Random one-liners and the dialog cloud are enabled by default. Disable them with the following commands or re-enable them as needed.
+
 ## Turn off Random One-Liner
 ```
 $ poketerm -o 0
 ```
 
-## Turn on dialog cloud
+## Re-enable dialog cloud
+Enabled by default; use this if you've disabled it.
 ```
 $ poketerm -d 1
 ```

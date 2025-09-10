@@ -3,6 +3,8 @@ import configparser as cp
 import os
 import random
 from pathlib import Path
+import shutil
+import textwrap
 
 try:
     from termcolor import colored
@@ -14,19 +16,29 @@ from .one_liners import one_liners
 
 
 def _dialog_cloud(text: str) -> str:
-    """Return a simple speech bubble around *text*.
+    """Return a speech bubble around *text* with basic wrapping.
 
-    The cloud size adapts to the length of the one liner so that the
-    Pokémon ASCII art printed below appears to be "saying" the line.
+    The bubble expands to match the longest wrapped line so longer
+    one-liners stay inside the cloud instead of spilling past the
+    terminal width.
     """
 
-    width = len(text)
-    top = " " + "_" * (width + 2)
-    middle = f"/ {text} \\"
-    bottom = "\\" + "_" * (width + 2) + "/"
-    tail1 = '  \\'  # tail pointing towards the pokemon
-    tail2 = '   \\'
-    return "\n".join([top, middle, bottom, tail1, tail2])
+    columns = shutil.get_terminal_size(fallback=(80, 24)).columns - 4
+    lines = textwrap.wrap(text, width=max(1, columns)) or [""]
+    inner_width = max(len(line) for line in lines)
+    top = " " + "_" * (inner_width + 2)
+    bottom = "\\" + "_" * (inner_width + 2) + "/"
+
+    bubble = [top]
+    if len(lines) == 1:
+        bubble.append(f"/ {lines[0].ljust(inner_width)} \\")
+    else:
+        bubble.append(f"/ {lines[0].ljust(inner_width)} \\")
+        for line in lines[1:-1]:
+            bubble.append(f"| {line.ljust(inner_width)} |")
+        bubble.append(f"\\ {lines[-1].ljust(inner_width)} /")
+    bubble.extend([bottom, "  \\", "   \\"])
+    return "\n".join(bubble)
 
 def main():
     parser = argparse.ArgumentParser(description = 'Display a Custom Message, a Pokemon ASCII Art and a Random Oneliner.\n'+colored('NOTE: Remember to turn off poketerm using -t 0 tag before you uninstall it','red'))
