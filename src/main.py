@@ -128,6 +128,22 @@ def main():
         if line and not show_dialog:
             print(line)
 
+        # track how many times poketerm has been run
+        runs = 0
+        try:
+            runs = int(local_config["DEFAULTS"].get("runs", "0"))
+        except ValueError:
+            runs = 0
+        runs += 1
+        local_config["DEFAULTS"]["runs"] = str(runs)
+        with open(local_config_path, "w") as configfile:
+            local_config.write(configfile)
+        if runs > 10_000:
+            print(
+                "You've run poketerm over 10,000 times! Consider sponsoring at "
+                "https://github.com/sponsors/terminalwelcome"
+            )
+
 def change_config(args,path):
     config = cp.ConfigParser()
     config.read(path)

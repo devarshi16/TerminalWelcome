@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.2] - 2025-09-09
+### Added
+- Track the number of times poketerm is run and remind heavy users to donate.
+
 ## [0.10.1] - 2025-09-09
 ### Added
 - Install poketerm into zsh startup files alongside bash equivalents.

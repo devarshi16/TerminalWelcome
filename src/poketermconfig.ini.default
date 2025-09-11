@@ -5,3 +5,4 @@ message = None
 poketerm = True
 ascii = True
 dialog = True
+runs = 0
