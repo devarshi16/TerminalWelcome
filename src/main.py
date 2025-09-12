@@ -147,7 +147,7 @@ def main():
             print(colored("🎉 WOW! You've run poketerm over 10,000 times! 🎉", "yellow"))
             print(
                 colored(
-                    "☕ Consider sponsoring the project: https://github.com/sponsors/terminalwelcome",
+                    "☕ Consider sponsoring the project: https://github.com/sponsors/devarshi16",
                     "green",
                 )
             )

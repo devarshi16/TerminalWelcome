@@ -52,6 +52,7 @@ def test_donation_message_after_threshold() -> None:
         out = result.stdout.lower()
         assert "sponsoring" in out
         assert "only" in out and "three times" in out
+        assert "https://github.com/sponsors/devarshi16" in result.stdout
         parser = cp.ConfigParser()
         parser.read(config_path)
         defaults = parser["DEFAULTS"]
@@ -80,6 +81,7 @@ def test_donation_message_shows_only_thrice() -> None:
         result = run_cli(["-p", "noascii", "-o", "0", "-s"], env=env)
         assert result.returncode == 0
         assert "sponsor" in result.stdout.lower()
+        assert "https://github.com/sponsors/devarshi16" in result.stdout
         parser = cp.ConfigParser()
         parser.read(config_path)
         defaults = parser["DEFAULTS"]
