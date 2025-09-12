@@ -14,6 +14,10 @@ except ImportError:  # pragma: no cover - fallback when termcolor isn't installe
 from .pokemons import pokemons
 from .one_liners import one_liners
 
+SUPPORT_URLS = [
+    "https://github.com/sponsors/devarshi16",
+]
+
 
 def _dialog_cloud(text: str) -> str:
     """Return a speech bubble around *text* with basic wrapping.
@@ -50,8 +54,13 @@ def main():
     parser.add_argument('-t','--turn-on',help='turn on poketerm [1], turn off [0]',type=int,choices=[0,1])
     parser.add_argument('-d','--dialog',help='turn dialog cloud on [1] or off [0]',type=int,choices=[0,1])
     parser.add_argument('-s','--show',help='run poketerm with the active configuration',action='store_true')
+    parser.add_argument('--support', help='print sponsor/donation URL and exit', action='store_true')
 
     args = parser.parse_args()
+    if args.support:
+        for url in SUPPORT_URLS:
+            print(url)
+        return
     '''
     print("INPUT ARGS")
     for arg in vars(args):
