@@ -5,3 +5,5 @@ message = None
 poketerm = True
 ascii = True
 dialog = True
+runs = 0
+sponsor_reminders = 0

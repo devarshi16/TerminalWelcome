@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.2] - 2025-09-09
+### Added
+- Track the number of times poketerm is run and remind heavy users to donate.
+### Changed
+- Limit donation reminders to three colorful messages for users exceeding 10,000 runs.
+- Update sponsorship link to https://github.com/sponsors/devarshi16.
+
 ## [0.10.1] - 2025-09-09
 ### Added
 - Install poketerm into zsh startup files alongside bash equivalents.
