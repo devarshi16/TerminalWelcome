@@ -9,7 +9,7 @@ sys.path.insert(0, str(ROOT))
 
 from src.one_liners import one_liners
 from src.pokemons import pokemons
-from src.main import _dialog_cloud
+from src.main import SUPPORT_URLS, _dialog_cloud
 
 
 def run_cli(args: list[str], env: dict[str, str] | None = None) -> subprocess.CompletedProcess:
@@ -25,6 +25,13 @@ def test_help_runs() -> None:
     result = run_cli(["-h"])
     assert result.returncode == 0
     assert "usage" in result.stdout.lower()
+
+
+def test_support_prints_links() -> None:
+    result = run_cli(["--support"])
+    assert result.returncode == 0
+    for url in SUPPORT_URLS:
+        assert url in result.stdout
 
 
 def test_show_pokemon() -> None:

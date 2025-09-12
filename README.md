@@ -42,6 +42,7 @@ $poketerm -t 0
 ```
 usage: main.py [-h] [-p {bulbasaur,dugtrio,meowth,pikachu,noascii}] [-l]
                [-o {0,1}] [-m MESSAGE] [-t {0,1}] [-d {0,1}] [-s]
+               [--support]
 
 Display a Custom Message, a Pokemon ASCII Art and a Random Oneliner.
 NOTE: Remember to turn off poketerm using -t 0 tag before you uninstall
@@ -63,6 +64,7 @@ optional arguments:
   -t {0,1}, --turn-on {0,1}
                         turn on poketerm [1], turn off [0]
   -s, --show            run poketerm with the active configuration
+  --support             print sponsor/donation URL and exit
 ```
 
 ## List of available pokemons
