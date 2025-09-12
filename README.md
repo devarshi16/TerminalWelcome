@@ -163,6 +163,14 @@ $ poketerm -p noascii
 $ poketerm -m nomessage
 ```
 
+## Support the Project
+
+Poketerm is completely free and open source. If it brightens up your
+terminal and you blaze past 10,000 runs (there's a gentle reminder when
+you do!), please consider supporting its continued development.
+
+[![GitHub Sponsors](https://img.shields.io/badge/Sponsor-%E2%9D%A4-ff69b4?style=for-the-badge&logo=github-sponsors)](https://github.com/sponsors/devarshi16)
+
 ## Acknowledgments
 
 Thanks to (http://silgro.com/fortunes.txt) for their one-liner database.
