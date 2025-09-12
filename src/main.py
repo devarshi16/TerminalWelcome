@@ -136,13 +136,27 @@ def main():
             runs = 0
         runs += 1
         local_config["DEFAULTS"]["runs"] = str(runs)
+
+        # remind frequent users to sponsor only a few times
+        reminders = 0
+        try:
+            reminders = int(local_config["DEFAULTS"].get("sponsor_reminders", "0"))
+        except ValueError:
+            reminders = 0
+        if runs > 10_000 and reminders < 3:
+            print(colored("🎉 WOW! You've run poketerm over 10,000 times! 🎉", "yellow"))
+            print(
+                colored(
+                    "☕ Consider sponsoring the project: https://github.com/sponsors/terminalwelcome",
+                    "green",
+                )
+            )
+            print(colored("This message will appear only three times.", "cyan"))
+            reminders += 1
+        local_config["DEFAULTS"]["sponsor_reminders"] = str(reminders)
+
         with open(local_config_path, "w") as configfile:
             local_config.write(configfile)
-        if runs > 10_000:
-            print(
-                "You've run poketerm over 10,000 times! Consider sponsoring at "
-                "https://github.com/sponsors/terminalwelcome"
-            )
 
 def change_config(args,path):
     config = cp.ConfigParser()

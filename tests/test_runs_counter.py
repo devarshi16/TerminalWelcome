@@ -45,11 +45,53 @@ def test_donation_message_after_threshold() -> None:
             "ascii = True\n"
             "dialog = False\n"
             "runs = 10000\n"
+            "sponsor_reminders = 0\n"
         )
         result = run_cli(["-p", "noascii", "-o", "0", "-s"], env=env)
         assert result.returncode == 0
-        assert "sponsoring" in result.stdout.lower()
+        out = result.stdout.lower()
+        assert "sponsoring" in out
+        assert "only" in out and "three times" in out
         parser = cp.ConfigParser()
         parser.read(config_path)
-        assert parser["DEFAULTS"].getint("runs") == 10001
+        defaults = parser["DEFAULTS"]
+        assert defaults.getint("runs") == 10001
+        assert defaults.getint("sponsor_reminders") == 1
+
+
+def test_donation_message_shows_only_thrice() -> None:
+    with tempfile.TemporaryDirectory() as tmp_home:
+        env = {**os.environ, "HOME": tmp_home}
+        config_dir = Path(tmp_home) / ".config" / "poketerm"
+        config_dir.mkdir(parents=True)
+        config_path = config_dir / "poketermconfig.ini"
+        config_path.write_text(
+            "[DEFAULTS]\n"
+            "pokemon = pikachu\n"
+            "one-liner = False\n"
+            "message = None\n"
+            "poketerm = True\n"
+            "ascii = True\n"
+            "dialog = False\n"
+            "runs = 10002\n"
+            "sponsor_reminders = 2\n"
+        )
+        # Third reminder should be shown
+        result = run_cli(["-p", "noascii", "-o", "0", "-s"], env=env)
+        assert result.returncode == 0
+        assert "sponsor" in result.stdout.lower()
+        parser = cp.ConfigParser()
+        parser.read(config_path)
+        defaults = parser["DEFAULTS"]
+        assert defaults.getint("runs") == 10003
+        assert defaults.getint("sponsor_reminders") == 3
+
+        # Fourth run should not show reminder
+        result = run_cli(["-p", "noascii", "-o", "0", "-s"], env=env)
+        assert result.returncode == 0
+        assert "sponsor" not in result.stdout.lower()
+        parser.read(config_path)
+        defaults = parser["DEFAULTS"]
+        assert defaults.getint("runs") == 10004
+        assert defaults.getint("sponsor_reminders") == 3
 
